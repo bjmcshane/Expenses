@@ -26,6 +26,24 @@ def get_validated_input(prompt, min_value=0):
             print("Please enter a valid number")
 
 def new_month():
+    """
+    Records financial data for the current or previous month.
+
+    Prompts user for various financial metrics including:
+    - Spending on food (eating out and groceries)
+    - Entertainment/alcohol expenses
+    - Retirement savings and contributions
+    - House savings and contributions
+    - Investment portfolio value and contributions
+
+    The data is appended to a CSV file named 'data.csv'. If the file doesn't exist,
+    it will be created with appropriate column headers.
+
+    The function allows logging data for either the current month or the previous month
+    based on user input.
+    """
+
+def new_month():
     date = datetime.datetime.today()
     year, month = date.year, date.month
 
