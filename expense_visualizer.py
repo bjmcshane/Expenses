@@ -51,7 +51,7 @@ def calculate_monthly_stats(df):
     if len(df) >= 2:
         current = df.iloc[-1]
         previous = df.iloc[-2]
-        
+
         print("\n=== Monthly Summary ===")
         print(f"\nTotal Spending This Month: ${current['money_spent_on_eating_out'] + current['money_spent_on_groceries'] + current['money_spent_entertainment_alcohol']:,.2f}")
         

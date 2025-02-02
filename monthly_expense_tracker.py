@@ -10,7 +10,7 @@ import calendar
 
 columns=[
     'year', 'month', 'date',
-    'money_spent_on_eating_out', 'money_spent_on_groceries', 'money_spent_entertainment_alcohol',
+    'money_spent_on_eating_out', 'eo_budget', 'money_spent_on_groceries', 'g_budget', 'money_spent_entertainment_alcohol', 'ea_budget', 'budget_pass_fail',
     'money_put_towards_retirement', 'money_saved_for_retirement', 'money_put_towards_house', 'money_saved_for_house', 'money_put_towards_portfolio', 'money_saved_in_portfolio'
 ]
 
@@ -56,14 +56,17 @@ def new_month():
 
     prompts = {
         'money_spent_on_eating_out': "How much did you spend eating out? ",
+        'eo_budget': "What's your current eating out budget? ",
         'money_spent_on_groceries': "How much did you spend on groceries? ",
+        'g_budget': "What's your current grocery budget? ",
         'money_spent_entertainment_alcohol': "How much did you spend on entertainment/alcohol? ",
+        'ea_budget': "What's your current entertainment/alcohol budget? ",
         'money_put_towards_retirement': "How much did you put away for retirement? (Currently automated @ 105/paycheck) ",
         'money_saved_for_retirement': "How much do you currently have saved for retirement? ",
         'money_put_towards_house': "How much money did you put towards your first house? ",
         'money_saved_for_house': "How much do you currently have saved for a house? ",
         'money_put_towards_portfolio': "How much did you put towards your portfolio? ",
-        'money_saved_in_portfolio': "How much is your portfolio currently worth? "
+        'money_saved_in_portfolio': "How much is your portfolio currently worth? ",
     }
 
     row = {
@@ -71,17 +74,21 @@ def new_month():
         'month': month,
         'date': datetime.datetime(year, month, 1).date()
     }
-    
+
     # Get all expense inputs with validation
     row.update({field: get_validated_input(prompt) for field, prompt in prompts.items()})
-    
+
+    row['budget_pass_fail'] = 'pass' if row['money_spent_on_eating_out'] <= row['eo_budget'] and row['money_spent_on_groceries'] <= row['g_budget'] and row['money_spent_entertainment_alcohol'] <= row['ea_budget'] else 'fail'
+
     # Read existing data and append new row
     try:
         df = pd.read_csv("data.csv")
     except FileNotFoundError:
         df = pd.DataFrame(columns=columns)
-    
-    pd.concat([df, pd.DataFrame([row])], ignore_index=True).to_csv("data.csv", index=False)
+ 
+    df = pd.concat([df, pd.DataFrame([row])], ignore_index=True)
+
+    return df
 
 def generate_dummy_data():
     # Create the data as a list of dictionaries - more straightforward than creating temp dictionaries
@@ -108,4 +115,5 @@ def generate_dummy_data():
 
 
 if __name__ == "__main__":
-    new_month()
+    df = new_month()
+    df.to_csv('data.csv', index=False)
