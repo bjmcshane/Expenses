@@ -1,0 +1,106 @@
+# Product Requirements Document (PRD)
+
+## Project Title: Personal Finance Tracker App
+
+### Overview
+Transform the current Python script and Google Sheets workflow into a user-friendly, cross-platform app for tracking personal finances, budgeting, and visualizing spending trends. The app should streamline data entry, automate data aggregation, and provide actionable insights to help users achieve their financial goals.
+
+---
+
+## Goals
+- Replace manual CSV and Google Sheets workflow with a seamless app experience
+- Enable easy, mobile-friendly expense entry and monthly review
+- Provide clear budget pass/fail feedback and visualizations
+- Support data import/export and integration with Google Sheets
+
+---
+
+## User Stories
+1. **As a user, I want to quickly log expenses on my phone or computer, so I can track my spending in real time.**
+2. **As a user, I want to set and adjust budgets for different categories (eating out, groceries, entertainment, etc.), so I can monitor my financial discipline.**
+3. **As a user, I want to see monthly summaries and visualizations of my spending, savings, and progress toward goals.**
+4. **As a user, I want to import my existing data from Google Sheets or CSV, so I don’t lose my financial history.**
+5. **As a user, I want to export my data for backup or further analysis.**
+6. **As a user, I want to receive feedback on whether I stayed within budget each month.**
+7. **As a user, I want to track my savings for retirement, a house, and my investment portfolio over time.**
+8. **As a user, I want to optionally sync or backup my data to Google Sheets or the cloud.**
+
+---
+
+## Features
+- **User Authentication** (optional for MVP)
+- **Expense Entry Form**
+  - Mobile and desktop friendly
+  - Fields for all tracked categories (eating out, groceries, entertainment/alcohol, retirement, house, portfolio)
+  - Date selection (default to today, allow backdating)
+- **Budget Management**
+  - Set and edit monthly budgets per category
+  - Visual feedback (pass/fail) for each category and overall
+- **Data Visualization**
+  - Monthly and yearly summaries
+  - Charts for spending, savings, and budget adherence
+- **Data Import/Export**
+  - Import from Google Sheets and CSV
+  - Export to CSV and Google Sheets
+- **Google Sheets Integration**
+  - Sync data with a Google Sheet (optional, for backup or advanced analysis)
+- **Notifications/Reminders** (optional)
+  - Remind user to log expenses or review monthly summary
+- **Settings/Profile**
+  - Manage budgets, categories, and integrations
+
+---
+
+## Technical Requirements
+- **Cross-platform**: Web app (React, Vue, or similar) and/or mobile app (React Native, Flutter, or similar)
+- **Backend**: Python (FastAPI, Flask, or Django) or Node.js (Express) for API and data storage
+- **Database**: SQLite or cloud-based (Firebase, Supabase, or similar)
+- **Google Sheets API**: For import/export and optional sync
+- **Authentication**: Email/password or OAuth (optional for MVP)
+- **Data Security**: Secure storage of user data, especially if cloud sync is enabled
+- **Deployment**: Cloud hosting (Vercel, Netlify, Heroku, or similar)
+
+---
+
+## MVP Scope
+- Expense entry and editing
+- Budget management and pass/fail feedback
+- Monthly summary and basic charts
+- Import/export CSV
+- (Optional) Google Sheets sync
+
+---
+
+## Stretch Goals
+- Mobile app version
+- Push notifications/reminders
+- Advanced analytics (spending trends, savings projections)
+- Multi-user support (households)
+- AI-powered insights or suggestions
+
+---
+
+## Success Metrics
+- User can log expenses and see budget feedback in under 1 minute
+- Monthly summary and charts are accurate and easy to understand
+- Data import/export works reliably
+- (If enabled) Google Sheets sync is robust and secure
+
+---
+
+## Risks & Mitigations
+- **Data loss/corruption**: Implement regular backups and export options
+- **Privacy/security**: Use secure authentication and encrypted storage
+- **API limits (Google Sheets)**: Handle errors gracefully and inform users
+
+---
+
+## References
+- Existing Python script: `monthly_expense_tracker.py`
+- Current Google Sheets workflow and survey
+- Example apps: YNAB, Mint, Monarch Money
+
+---
+
+## Appendix
+- Example data fields: year, month, date, money_spent_on_eating_out, eo_budget, money_spent_on_groceries, g_budget, money_spent_entertainment_alcohol, ea_budget, budget_pass_fail, money_put_towards_retirement, money_saved_for_retirement, money_put_towards_house, money_saved_for_house, money_put_towards_portfolio, money_saved_in_portfolio 
