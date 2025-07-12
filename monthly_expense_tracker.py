@@ -1,12 +1,15 @@
 import pandas as pd
-# import numpy as np
-from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
-from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
+import numpy as np
+# from google.auth.transport.requests import Request
+# from google.oauth2.credentials import Credentials
+# from google_auth_oauthlib.flow import InstalledAppFlow
+# from googleapiclient.discovery import build
+# from googleapiclient.errors import HttpError
 import datetime
 import calendar
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+from datetime import datetime
 
 columns=[
     'year', 'month', 'date',
@@ -44,9 +47,10 @@ def new_month():
     """
 
 def new_month():
-    date = datetime.datetime.today()
+    date = datetime.datetime.today().date()
     year, month = date.year, date.month
 
+    print(f"Today's date: {date}")
     if input("Enter 'Y' if you're logging finances for the previous month: ").lower() == 'y':
         if month == 1:
             year -= 1
@@ -72,7 +76,7 @@ def new_month():
     row = {
         'year': year,
         'month': month,
-        'date': datetime.datetime(year, month, 1).date()
+        'date': date
     }
 
     # Get all expense inputs with validation
@@ -87,8 +91,8 @@ def new_month():
         df = pd.DataFrame(columns=columns)
  
     df = pd.concat([df, pd.DataFrame([row])], ignore_index=True)
+    df.to_csv("data.csv", index=False)
 
-    return df
 
 def generate_dummy_data():
     # Create the data as a list of dictionaries - more straightforward than creating temp dictionaries
@@ -115,5 +119,4 @@ def generate_dummy_data():
 
 
 if __name__ == "__main__":
-    df = new_month()
-    df.to_csv('data.csv', index=False)
+    new_month()

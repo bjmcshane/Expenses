@@ -4,6 +4,9 @@ from datetime import datetime
 import calendar
 import seaborn as sns
 
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
+
 def plot_spending_trends(df):
     """Plot spending trends over time"""
     plt.style.use('seaborn')
@@ -71,11 +74,12 @@ if __name__ == "__main__":
     
     # Get new monthly data
     print("Let's record this month's financial data...")
-    new_month()
+    # new_month()
     
     # Read the updated CSV and create visualizations
     try:
         df = pd.read_csv("data.csv")
+        print(df.head())
         # Convert date strings to datetime objects
         df['date'] = pd.to_datetime(df['date'])
         
